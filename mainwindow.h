@@ -1,6 +1,11 @@
 #include <QMainWindow>
 #include <QTimer>
 #include <opencv2/opencv.hpp>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlError>
+
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -24,4 +29,5 @@ private:
     bool doorOpen = false;
     QTimer *doorTimer;
     bool facePresent = false;
+    QSqlDatabase db;
 };

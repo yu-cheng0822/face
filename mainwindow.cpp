@@ -5,6 +5,20 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("users.db");
+
+    if (!db.open()) {
+        qDebug() << "DB open failed:" << db.lastError().text();
+    } else {
+        qDebug() << "DB opened";
+    }
+    QSqlQuery query("SELECT id, name FROM users");
+
+    while (query.next()) {
+        qDebug() << "ID:" << query.value(0).toInt()
+        << "Name:" << query.value(1).toString();
+    }
     ui->setupUi(this);
 
 
@@ -78,6 +92,7 @@ void MainWindow::updateFrame()
             Qt::KeepAspectRatio
             )
         );
+
 }
 
 MainWindow::~MainWindow()
