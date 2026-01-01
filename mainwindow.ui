@@ -40,6 +40,19 @@
      <string>TextLabel</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label_status">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>20</y>
+      <width>261</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>open door</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
