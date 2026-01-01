@@ -13,6 +13,16 @@ MainWindow::MainWindow(QWidget *parent)
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &MainWindow::updateFrame);
     timer->start(60);
+    doorTimer = new QTimer(this);
+    doorTimer->setSingleShot(true);
+
+    connect(doorTimer, &QTimer::timeout, this, [=]() {
+        doorOpen = false;
+        ui->label_status->setText("Door Locked");
+        ui->label_status->setStyleSheet("color: red; font-weight: bold;");
+    });
+
+
 }
 void MainWindow::updateFrame()
 {
@@ -20,11 +30,9 @@ void MainWindow::updateFrame()
     cap >> frame;
     if (frame.empty()) return;
 
-    // 轉為灰階方便人臉辨識
     cv::Mat gray;
     cv::cvtColor(frame, gray, cv::COLOR_BGR2GRAY);
 
-    // 載入Haar Cascade分類器
     static cv::CascadeClassifier face_cascade;
     static bool loaded = false;
     if(!loaded) {
@@ -37,13 +45,24 @@ void MainWindow::updateFrame()
 
     std::vector<cv::Rect> faces;
     face_cascade.detectMultiScale(gray, faces, 1.1, 3, 0, cv::Size(30, 30));
+    if (!faces.empty() && !facePresent) {
+        facePresent = true;
 
-    // 畫出偵測到的人臉框
+        if (!doorOpen) {
+            doorOpen = true;
+            ui->label_status->setText("有人\nDoor Open");
+            ui->label_status->setStyleSheet("color: green; font-weight: bold;");
+            doorTimer->start(3000);
+        }
+    }
+    else if (faces.empty()) {
+        facePresent = false;
+    }
+
     for (size_t i = 0; i < faces.size(); i++) {
         cv::rectangle(frame, faces[i], cv::Scalar(0, 255, 0), 2);
     }
 
-    // 轉RGB並顯示到Qt Label
     cv::cvtColor(frame, frame, cv::COLOR_BGR2RGB);
     QImage img(
         frame.data,

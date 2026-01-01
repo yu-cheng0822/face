@@ -21,4 +21,7 @@ private:
     Ui::MainWindow *ui;
     QTimer *timer;
     cv::VideoCapture cap; // 攝影機
+    bool doorOpen = false;
+    QTimer *doorTimer;
+    bool facePresent = false;
 };
