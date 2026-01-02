@@ -26,11 +26,9 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 INCLUDEPATH += C:/opencv/build/include
 
 CONFIG(debug, debug|release) {
-    # Debug 時連 debug 版的 lib
     LIBS += -LC:/opencv/build/x64/vc16/lib \
             -lopencv_world4120d
 } else {
-    # Release 時連 release 版的 lib
     LIBS += -LC:/opencv/build/x64/vc16/lib \
             -lopencv_world4120
 }
