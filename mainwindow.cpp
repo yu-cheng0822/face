@@ -11,9 +11,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    // ----------------------
-    // 資料庫初始化
-    // ----------------------
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("users.db");
 
@@ -29,9 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
         << "Name:" << query.value(1).toString();
     }
 
-    // ----------------------
-    // DNN 模型載入
-    // ----------------------
+
     QString protoPath = "C:/opencv_project/face/deploy.prototxt";
     QString modelPath = "C:/opencv_project/face/res10_300x300_ssd_iter_140000.caffemodel";
 
