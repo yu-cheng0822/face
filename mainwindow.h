@@ -20,12 +20,12 @@ public:
     ~MainWindow();
 
 private slots:
-    void updateFrame();   // 更新影像
+    void updateFrame();
 
 private:
     Ui::MainWindow *ui;
     QTimer *timer;
-    cv::VideoCapture cap; // 攝影機
+    cv::VideoCapture cap;
     bool doorOpen = false;
     QTimer *doorTimer;
     bool facePresent = false;
