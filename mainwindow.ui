@@ -66,14 +66,37 @@
    <widget class="QPushButton" name="pushButton_register">
     <property name="geometry">
      <rect>
-      <x>580</x>
+      <x>560</x>
       <y>10</y>
       <width>96</width>
       <height>28</height>
      </rect>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string>註冊使用者</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_DELETE">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>460</y>
+      <width>96</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>刪除使用者</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_DELETNAME">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>460</y>
+      <width>113</width>
+      <height>27</height>
+     </rect>
     </property>
    </widget>
   </widget>
