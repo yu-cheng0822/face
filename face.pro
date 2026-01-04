@@ -23,14 +23,63 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
-INCLUDEPATH += C:/opencv/build/include
+# Cross-platform OpenCV configuration
+unix {
+    # Linux/Unix: Try to use pkg-config first
+    CONFIG += link_pkgconfig
+    PKGCONFIG += opencv4
 
-CONFIG(debug, debug|release) {
-    # Debug 時連 debug 版的 lib
-    LIBS += -LC:/opencv/build/x64/vc16/lib \
-            -lopencv_world4120d
-} else {
-    # Release 時連 release 版的 lib
-    LIBS += -LC:/opencv/build/x64/vc16/lib \
-            -lopencv_world4120
+    # Fallback to manual configuration if pkg-config fails
+    !packagesExist(opencv4) {
+        INCLUDEPATH += /usr/local/include/opencv4
+        LIBS += -L/usr/local/lib -lopencv_core -lopencv_imgproc -lopencv_highgui \
+                -lopencv_imgcodecs -lopencv_videoio -lopencv_dnn
+    }
+}
+
+# Windows OpenCV configuration
+# IMPORTANT: Adjust these paths to match your OpenCV installation!
+# Default assumes OpenCV 4.x is installed at C:/opencv
+win32 {
+    # You can customize these variables to match your installation
+    isEmpty(OPENCV_DIR) {
+        OPENCV_DIR = C:/opencv/build
+    }
+    isEmpty(OPENCV_VERSION) {
+        OPENCV_VERSION = 4120
+    }
+
+    message("Using OpenCV directory: $$OPENCV_DIR")
+    message("Using OpenCV version: $$OPENCV_VERSION")
+
+    INCLUDEPATH += $$OPENCV_DIR/include
+
+    # Detect compiler type
+    win32-msvc* {
+        message("Detected MSVC compiler")
+        OPENCV_LIB_DIR = $$OPENCV_DIR/x64/vc16/lib
+        CONFIG(debug, debug|release) {
+            LIBS += -L$$OPENCV_LIB_DIR -lopencv_world$${OPENCV_VERSION}d
+        } else {
+            LIBS += -L$$OPENCV_LIB_DIR -lopencv_world$${OPENCV_VERSION}
+        }
+    } else:win32-g++ {
+        message("Detected MinGW compiler")
+        OPENCV_LIB_DIR = $$OPENCV_DIR/x64/mingw/lib
+        CONFIG(debug, debug|release) {
+            LIBS += -L$$OPENCV_LIB_DIR -lopencv_world$${OPENCV_VERSION}d
+        } else {
+            LIBS += -L$$OPENCV_LIB_DIR -lopencv_world$${OPENCV_VERSION}
+        }
+    } else {
+        warning("Unknown Windows compiler. Trying MinGW paths.")
+        OPENCV_LIB_DIR = $$OPENCV_DIR/x64/mingw/lib
+        CONFIG(debug, debug|release) {
+            LIBS += -L$$OPENCV_LIB_DIR -lopencv_world$${OPENCV_VERSION}d
+        } else {
+            LIBS += -L$$OPENCV_LIB_DIR -lopencv_world$${OPENCV_VERSION}
+        }
+    }
+
+    message("OpenCV library directory: $$OPENCV_LIB_DIR")
 }
