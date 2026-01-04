@@ -286,7 +286,7 @@ bool MainWindow::recognizeFace(const cv::Mat &faceROI, int &outId)
         }
 
         float dist = cv::norm(vec - dbVec);
-        if(dist < 0.8){
+        if(dist < 0.9){
             qDebug() << "Recognized ID:" << id << "Distance:" << dist;
             outId = id;
             return true;
