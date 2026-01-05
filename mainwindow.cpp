@@ -269,7 +269,7 @@ bool MainWindow::recognizeFace(const cv::Mat &faceROI, int &outId)
     cv::Mat blob = cv::dnn::blobFromImage(faceROI, 1.0/255.0, cv::Size(96,96),
                                           cv::Scalar(0,0,0), true, false);
     embedNet.setInput(blob);
-    cv::Mat vec = embedNet.forward(); // 1x128
+    cv::Mat vec = embedNet.forward();
 
     QString selectSql = "SELECT id";
     for(int i=1;i<=128;i++) selectSql += QString(", v%1").arg(i);
@@ -286,7 +286,7 @@ bool MainWindow::recognizeFace(const cv::Mat &faceROI, int &outId)
         }
 
         float dist = cv::norm(vec - dbVec);
-        if(dist < 0.9){
+        if(dist < 0.6){
             qDebug() << "Recognized ID:" << id << "Distance:" << dist;
             outId = id;
             return true;
