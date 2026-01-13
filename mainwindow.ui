@@ -6,98 +6,177 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>803</width>
-    <height>600</height>
+    <width>900</width>
+    <height>700</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>人臉辨識門禁系統 - Face Recognition Access Control</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="label_status">
     <property name="geometry">
      <rect>
       <x>20</x>
       <y>10</y>
-      <width>221</width>
-      <height>19</height>
+      <width>860</width>
+      <height>40</height>
      </rect>
     </property>
     <property name="text">
-     <string>camera preview</string>
+     <string>Door Locked</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="styleSheet">
+     <string>color: red; font-weight: bold; font-size: 16pt; border: 2px solid #ccc; border-radius: 5px; padding: 5px;</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>60</y>
+      <width>150</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>攝影機預覽 (Camera Preview)</string>
+    </property>
+    <property name="styleSheet">
+     <string>font-weight: bold;</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_camera">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>60</y>
-      <width>761</width>
-      <height>401</height>
+      <x>20</x>
+      <y>90</y>
+      <width>860</width>
+      <height>480</height>
      </rect>
     </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string>攝影機啟動中...</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="styleSheet">
+     <string>border: 2px solid #333; background-color: #000; color: #fff;</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_status">
+   <widget class="QWidget" name="widget_register" native="true">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>0</y>
-      <width>261</width>
-      <height>51</height>
+      <x>20</x>
+      <y>585</y>
+      <width>430</width>
+      <height>60</height>
      </rect>
     </property>
-    <property name="text">
-     <string>open door</string>
-    </property>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>5</x>
+       <y>5</y>
+       <width>100</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>註冊新使用者:</string>
+     </property>
+     <property name="styleSheet">
+      <string>font-weight: bold;</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_name">
+     <property name="geometry">
+      <rect>
+       <x>5</x>
+       <y>30</y>
+       <width>280</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>請輸入使用者姓名</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_register">
+     <property name="geometry">
+      <rect>
+       <x>295</x>
+       <y>30</y>
+       <width>130</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>註冊使用者</string>
+     </property>
+     <property name="styleSheet">
+      <string>QPushButton { background-color: #4CAF50; color: white; font-weight: bold; border-radius: 5px; } QPushButton:hover { background-color: #45a049; }</string>
+     </property>
+    </widget>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_name">
+   <widget class="QWidget" name="widget_delete" native="true">
     <property name="geometry">
      <rect>
-      <x>440</x>
-      <y>10</y>
-      <width>113</width>
-      <height>27</height>
+      <x>460</x>
+      <y>585</y>
+      <width>430</width>
+      <height>60</height>
      </rect>
     </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_register">
-    <property name="geometry">
-     <rect>
-      <x>560</x>
-      <y>10</y>
-      <width>96</width>
-      <height>28</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>註冊使用者</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_DELETE">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>460</y>
-      <width>96</width>
-      <height>28</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>刪除使用者</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_DELETNAME">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>460</y>
-      <width>113</width>
-      <height>27</height>
-     </rect>
-    </property>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>5</x>
+       <y>5</y>
+       <width>100</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>刪除使用者:</string>
+     </property>
+     <property name="styleSheet">
+      <string>font-weight: bold;</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_DELETNAME">
+     <property name="geometry">
+      <rect>
+       <x>5</x>
+       <y>30</y>
+       <width>280</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="placeholderText">
+      <string>請輸入要刪除的使用者姓名</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_DELETE">
+     <property name="geometry">
+      <rect>
+       <x>295</x>
+       <y>30</y>
+       <width>130</width>
+       <height>30</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>刪除使用者</string>
+     </property>
+     <property name="styleSheet">
+      <string>QPushButton { background-color: #f44336; color: white; font-weight: bold; border-radius: 5px; } QPushButton:hover { background-color: #da190b; }</string>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -105,7 +184,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>803</width>
+     <width>900</width>
      <height>24</height>
     </rect>
    </property>
